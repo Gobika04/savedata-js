@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forms</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<center>
+  <h2>Enter Data into Table 1</h2>
+
+ 
+  <form id="dataForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" name="age" required><br>
+
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" name="gender" required>
+    
+    <br>
+
+    <label for="course">Course:</label>
+    <input type="text" id="course" name="course" required><br>
+
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" required><br>
+
+    <button type="submit" style="background-color: green; color:white";>Save to Table 1</button>
+  </form>
+
+  <h2>Table 1 (Temporary Table)</h2>
+  <table id="table1" border="2">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Course</th>
+        <th>Email</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+
+  <h2>Table 2 (Saved Data Table)</h2>
+  <table id="table2" border="2">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Course</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+    </tbody>
+  </table>
+
+  <script>
+    
+    document.getElementById('dataForm').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+
+      
+      var name = document.getElementById('name').value;
+      var age = document.getElementById('age').value;
+      var gender = document.getElementById('gender').value;
+      var course = document.getElementById('course').value;
+      var email = document.getElementById('email').value;
+
+      
+      var newRow = document.createElement('tr');
+
+      
+      var nameCell = document.createElement('td');
+      nameCell.textContent = name;
+      newRow.appendChild(nameCell);
+
+      var ageCell = document.createElement('td');
+      ageCell.textContent = age;
+      newRow.appendChild(ageCell);
+
+      var genderCell = document.createElement('td');
+      genderCell.textContent = gender;
+      newRow.appendChild(genderCell);
+
+      var courseCell = document.createElement('td');
+      courseCell.textContent = course;
+      newRow.appendChild(courseCell);
+
+
+      var emailCell = document.createElement('td');
+      emailCell.textContent = email;
+      newRow.appendChild(emailCell);
+
+      
+      var actionCell = document.createElement('td');
+      var moveButton = document.createElement('button');
+      moveButton.textContent = 'Save to Table 2';
+      moveButton.onclick = function() {
+        saveToTable2(newRow); 
+      };
+      actionCell.appendChild(moveButton);
+      newRow.appendChild(actionCell);
+
+      
+      document.getElementById('table1').querySelector('tbody').appendChild(newRow);
+
+      
+      document.getElementById('dataForm').reset();
+    });
+
+    
+    function saveToTable2(row) {
+      
+      var table2Body = document.getElementById('table2').querySelector('tbody');
+
+      
+      table2Body.appendChild(row);
+
+      
+      row.querySelector('button').remove(); 
+    }
+  </script>
+</center>
+</body>
+</html>
